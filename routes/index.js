@@ -4,6 +4,7 @@ const { celebrate, Joi } = require('celebrate');
 const { login, createUser } = require('../controllers/users');
 const usersRoute = require('./users');
 const messagesRoute = require('./messages');
+const numbersRoute = require('./numbers');
 const { auth } = require('../middlewares/auth');
 const { NotFoundError } = require('../errors/not-found-error');
 
@@ -33,6 +34,7 @@ routes.post(
 
 routes.use('/users', usersRoute);
 routes.use('/messages', auth, messagesRoute);
+routes.use('/numbers', auth, numbersRoute);
 routes.use('*', (req, res, next) => {
   const err = new NotFoundError('Неверный адрес запроса');
   return next(err);
